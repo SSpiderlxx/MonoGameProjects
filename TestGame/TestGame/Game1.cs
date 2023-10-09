@@ -60,6 +60,7 @@ namespace TestGame
 
             foreach (Bullet bullet in publics.bulletsToUpdate)
             {
+                bullet.Texture = Content.Load<Texture2D>("Assets/Player");
                 bullet.Update();
             }
 
@@ -89,7 +90,6 @@ namespace TestGame
             foreach(Bullet bullet in publics.bulletsToUpdate)
             {
                 _spriteBatch.Draw(bullet.Texture, bullet.Rectangle, Color.White);
-
             }
 
             _spriteBatch.End();

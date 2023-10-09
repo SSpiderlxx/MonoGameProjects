@@ -19,7 +19,9 @@ namespace TestGame
 
         public static Vector2 GetDirection(Vector2 Position, Vector2 Desination)
         {
-            return Position - Desination;
+            Vector2 direction = Desination - Position;
+            direction.Normalize();
+            return direction;
         }
     }
 }

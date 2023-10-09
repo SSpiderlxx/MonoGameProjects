@@ -20,15 +20,12 @@ namespace TestGame
         public Vector2 Direction;
         public Vector2 Scale;
 
-        public Bullet(Vector2 MousePositon)
-        {
-            Direction = Functions.GetDirection(Position, MousePositon);
-        }
+        float speed = 5f;
 
         public void Update()
         {
 
-            Position += Direction;
+            Position += Direction * speed;
 
             Rectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Scale.X, (int)Scale.Y);
         }
