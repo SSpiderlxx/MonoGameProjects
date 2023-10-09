@@ -13,6 +13,9 @@ namespace TestGame
         private Rectangle Rectangle;
 
         private Player player;
+        private Enemy enemy;
+
+        Publics publics = new();
 
         public Game1()
         {
@@ -37,6 +40,10 @@ namespace TestGame
             background = Content.Load<Texture2D>("Assets/Enemy");
             player = new Player();
             player.Texture = Content.Load<Texture2D>("Assets/Player");
+
+            enemy = new Enemy();
+            enemy.position = new Vector2(200, 200);
+            enemy.Texture = Content.Load<Texture2D>("Assets/Enemy");
         }
 
         protected override void Update(GameTime gameTime)
@@ -47,10 +54,16 @@ namespace TestGame
             // TODO: Add your update logic here
 
             player.Update();
+            enemy.Update();
 
             Rectangle = new Rectangle(100, 100, 50, 50);
 
-            if(Collision.AABB(player.Rectangle, Rectangle))
+            foreach (Bullet bullet in publics.bulletsToUpdate)
+            {
+                bullet.Update();
+            }
+
+            if (Collision.AABB(player.Rectangle, Rectangle))
             {
                 Rectangle = new Rectangle(200, 100, 50, 50);
             }
@@ -70,6 +83,14 @@ namespace TestGame
             _spriteBatch.Draw(background, Rectangle, Color.White);
 
             _spriteBatch.Draw(player.Texture, player.Rectangle, Color.White) ;
+
+            _spriteBatch.Draw(enemy.Texture, enemy.Rectangle, Color.White);
+
+            foreach(Bullet bullet in publics.bulletsToUpdate)
+            {
+                _spriteBatch.Draw(bullet.Texture, bullet.Rectangle, Color.White);
+
+            }
 
             _spriteBatch.End();
 

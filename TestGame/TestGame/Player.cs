@@ -20,6 +20,8 @@ namespace TestGame
 
         public int Speed = 2;
 
+        Publics publics = Publics.Instance;
+
         public void Update()
         {
 
@@ -40,6 +42,12 @@ namespace TestGame
                 position.Y += Speed;
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                Bullet bullet = new Bullet(new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y));
+            }
+
+            publics.PlayerPos = position;
             Rectangle = new Rectangle((int)position.X, (int)position.Y, (int)Scale.X, (int)Scale.Y);
         }
 
