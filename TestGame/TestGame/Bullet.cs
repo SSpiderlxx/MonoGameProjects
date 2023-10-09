@@ -22,9 +22,14 @@ namespace TestGame
 
         float speed = 5f;
 
+        public bool Destroy = false;
+
         public void Update()
         {
-
+            if (Destroy)
+            {
+                Publics.Instance.bulletsToRemove.Add(this);
+            }
             Position += Direction * speed;
 
             Rectangle = new Rectangle((int)Position.X, (int)Position.Y, (int)Scale.X, (int)Scale.Y);

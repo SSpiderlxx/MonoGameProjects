@@ -44,7 +44,11 @@ namespace TestGame
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                Bullet bullet = new Bullet(new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y));
+                Bullet bullet = new Bullet();
+                bullet.Position = position;
+                bullet.Direction = Functions.GetDirection(bullet.Position, new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y));
+                bullet.Scale = new Vector2(10, 10);
+                publics.bulletsToUpdate.Add(bullet);
             }
 
             publics.PlayerPos = position;

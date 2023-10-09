@@ -61,7 +61,18 @@ namespace TestGame
             foreach (Bullet bullet in publics.bulletsToUpdate)
             {
                 bullet.Texture = Content.Load<Texture2D>("Assets/Player");
+                if (Collision.AABB(bullet.Rectangle, enemy.Rectangle))
+                {
+                    bullet.Destroy = true;
+                }
                 bullet.Update();
+            }
+
+            for(int i = 0; i < publics.bulletsToRemove.Count; i++)
+            {
+
+                Bullet bullet = publics.bulletsToRemove[i];
+                publics.bulletsToUpdate.Remove(bullet);
             }
 
             if (Collision.AABB(player.Rectangle, Rectangle))
@@ -89,7 +100,8 @@ namespace TestGame
 
             foreach(Bullet bullet in publics.bulletsToUpdate)
             {
-                _spriteBatch.Draw(bullet.Texture, bullet.Rectangle, Color.White);
+                if(!bullet.Destroy)
+                    _spriteBatch.Draw(bullet.Texture, bullet.Rectangle, Color.White);
             }
 
             _spriteBatch.End();

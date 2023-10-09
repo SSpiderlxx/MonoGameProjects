@@ -20,6 +20,7 @@ namespace TestGame
         public Vector2 PlayerPos;
 
         public List<Bullet> bulletsToUpdate = new List<Bullet>();
+        public List<Bullet> bulletsToRemove = new List<Bullet>();
 
     }
 }
